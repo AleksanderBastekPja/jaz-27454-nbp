@@ -22,11 +22,9 @@ public class Jaz27454NbpService {
 
 
     public Currency getAverageLastDaysRate(String currency, Instant startDate, Instant endDate) {
-        Duration duration = Duration.between(startDate, endDate);
-        Long days = duration.toDays();
-
         CurrencyNBP lastDaysRates = restTemplate.getForObject("https://api.nbp.pl/api/exchangerates/rates/A/" + currency + "/" + startDate.toString().split("T")[0] + "/" + endDate.toString().split("T")[0] + "?format=json", CurrencyNBP.class);
-        Double averageRate = lastDaysRates.getRates().stream().map(Rate::getMid).reduce(0D, Double::sum) / days;
+        Double sumRate = lastDaysRates.getRates().stream().map(Rate::getMid).reduce(0D, Double::sum);
+        Double averageRate = sumRate / lastDaysRates.getRates().stream().count();
 
         return new Currency(null, currency, startDate, endDate, averageRate, Instant.now());
     }
