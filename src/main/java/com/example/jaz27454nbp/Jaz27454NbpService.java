@@ -33,7 +33,7 @@ public class Jaz27454NbpService {
 
     public Currency getCurrency(String currencyCode, Instant startDate, Instant endDate) {
         Currency currency = getAverageLastDaysRate(currencyCode, startDate, endDate);
-//        jaz27454NbpRepository.save(currency);
+        jaz27454NbpRepository.save(currency);
         return currency;
     }
 }

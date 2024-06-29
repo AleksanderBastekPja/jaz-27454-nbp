@@ -18,9 +18,7 @@ public class Jaz27454RestController {
 
     @GetMapping("/currency/{code}")
     public ResponseEntity<Currency> getCurrency(@PathVariable("code") String code, @RequestBody DateRequest dateRequest) {
-//        ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
-//        Instant instant = zonedDateTime.toInstant();
-        return ResponseEntity.ok(jaz27454NbpService.getAverageLastDaysRate(code, dateRequest.getStartDate(), dateRequest.getEndDate()));
+        return ResponseEntity.ok(jaz27454NbpService.getCurrency(code, dateRequest.getStartDate(), dateRequest.getEndDate()));
     }
 
 
